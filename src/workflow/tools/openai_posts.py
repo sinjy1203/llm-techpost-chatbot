@@ -5,7 +5,7 @@ from .base import VectorSearchInput, VectorSearchTool
 
 class OpenaiSearchInput(VectorSearchInput):
     query: str = Field(
-        description='A query to search for OpenAI related documents and posts.'
+        description='A query to search for OpenAI related documents and posts. Must be in English.'
     )
 
 

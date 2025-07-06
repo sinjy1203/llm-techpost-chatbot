@@ -61,7 +61,8 @@ async def lifespan(app: FastAPI):
             AnthropicSearchTool(
                 qdrant_url=QDRANT_URL,
                 embedding_model=EMBEDDING_MODEL
-            )
+            ),
+            WebSearchTool()   
         ]
     )
     

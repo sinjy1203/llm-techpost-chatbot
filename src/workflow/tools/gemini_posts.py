@@ -5,7 +5,7 @@ from .base import VectorSearchInput, VectorSearchTool
 
 class GeminiSearchInput(VectorSearchInput):
     query: str = Field(
-        description='A query to search for Gemini related documents and posts.'
+        description='A query to search for Gemini related documents and posts. Must be in English.'
     )
 
 
