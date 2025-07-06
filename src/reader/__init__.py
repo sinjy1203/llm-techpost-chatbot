@@ -1,4 +1,4 @@
-from .html import HTMLReader
 from .pdf import PDFReader
+from .html import HTMLReader
 
-__all__ = ["HTMLReader", "PDFReader"]
+__all__ = ["PDFReader", "HTMLReader"]
