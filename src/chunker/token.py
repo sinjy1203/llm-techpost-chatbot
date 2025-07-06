@@ -1,6 +1,5 @@
 from typing import List, Optional
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_core.documents import Document
 
 
 class TokenSizeChunker:
@@ -31,7 +30,7 @@ class TokenSizeChunker:
             separators=separators
         )
     
-    def __call__(self, text: str, metadata: Optional[dict] = None) -> List[Document]:
+    def __call__(self, text: str, metadata: Optional[dict] = None) -> List[dict]:
         """
         텍스트를 청킹하여 Document 리스트로 반환합니다.
         
@@ -50,20 +49,16 @@ class TokenSizeChunker:
             documents = []
             for i, chunk in enumerate(chunks):
                 # 기본 메타데이터 설정
-                doc_metadata = {
+                doc = {
+                    "content": chunk,
                     "chunk_order": i,
                 }
                 
                 # 사용자 메타데이터 추가
                 if metadata:
-                    doc_metadata.update(metadata)
+                    doc.update(metadata)
                 
-                # Document 객체 생성
-                document = Document(
-                    page_content=chunk,
-                    metadata=doc_metadata
-                )
-                documents.append(document)
+                documents.append(doc)
             
             return documents
             
