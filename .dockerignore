@@ -1,0 +1,23 @@
+# 개발 환경 파일
+.cursor
+.venv
+.vscode
+.DS_Store
+
+# 빌드 캐시 및 데이터
+__pycache__
+qdrant_data
+
+# 테스트 및 개발 파일
+**/test_*.py
+**/*test*.py
+
+# 환경 변수 및 설정 파일
+.env
+
+# 개발 데이터 및 로그
+data/
+
+# Git 관련
+.git
+.gitignore

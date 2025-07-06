@@ -10,3 +10,17 @@ services:
       - 6335
     volumes:
       - ./qdrant_data:/qdrant/storage
+
+  api:
+    build: .
+    image: sinjy1203/llm-techpost-chatbot-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - qdrant
+    env_file:
+      - .env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+    command: sh -c "uv run uvicorn main:app --host 0.0.0.0 --port 8000"
+    restart: unless-stopped

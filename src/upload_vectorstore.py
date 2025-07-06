@@ -14,8 +14,8 @@ path2tool = {
     "./data/Claude_4_System_Card.pdf": AnthropicSearchTool,
     "https://model-spec.openai.com/2025-04-11.html": OpenaiSearchTool,
 }
-qdrant_url = "http://localhost:6333"
-embedding_model = "text-embedding-3-small"
+QDRANT_URL = os.getenv("QDRANT_URL")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
 
 
 async def main():
@@ -50,8 +50,8 @@ async def main():
         
         # 3. 해당 도구 초기화
         vector_tool = tool_class(
-            qdrant_url=qdrant_url,
-            embedding_model=embedding_model
+            qdrant_url=QDRANT_URL,
+            embedding_model=EMBEDDING_MODEL
         )
         
         # 4. Qdrant에 문서 업로드 (컬렉션 생성)
