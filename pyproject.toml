@@ -12,6 +12,9 @@ dependencies = [
     "beautifulsoup4>=4.13.4",
     "langgraph>=0.5.1",
     "langchain-text-splitters>=0.3.8",
+    "qdrant-client>=1.14.3",
+    "langchain-openai>=0.3.27",
+    "python-dotenv>=1.1.1",
 ]
 readme = "README.md"
 requires-python = ">=3.11"
