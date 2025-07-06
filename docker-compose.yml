@@ -21,8 +21,7 @@ services:
 
   upload:
     profiles: ["init"] 
-    build: .
-    image: sinjy1203/llm-techpost-chatbot-api
+    image: sinjy1203/llm-techpost-chatbot-api:latest
     depends_on:
       qdrant:
         condition: service_healthy
@@ -36,8 +35,7 @@ services:
     restart: "no"
 
   api:
-    build: .
-    image: sinjy1203/llm-techpost-chatbot-api
+    image: sinjy1203/llm-techpost-chatbot-api:latest
     ports:
       - "8000:8000"
     depends_on:

@@ -21,3 +21,4 @@ data/
 # Git 관련
 .git
 .gitignore
+.github
