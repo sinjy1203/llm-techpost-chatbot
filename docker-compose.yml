@@ -10,6 +10,30 @@ services:
       - 6335
     volumes:
       - ./qdrant_data:/qdrant/storage
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  upload:
+    profiles: ["init"] 
+    build: .
+    image: sinjy1203/llm-techpost-chatbot-api
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+    command: uv run python upload_vectorstore.py
+    volumes:
+      - ./data:/app/src/data:ro
+    restart: "no"
 
   api:
     build: .
@@ -17,10 +41,11 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - qdrant
+      qdrant:
+        condition: service_healthy
     env_file:
       - .env
     environment:
       - QDRANT_URL=http://qdrant:6333
-    command: sh -c "uv run uvicorn main:app --host 0.0.0.0 --port 8000"
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000
     restart: unless-stopped
