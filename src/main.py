@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from langchain_core.messages import HumanMessage
+from langfuse.langchain import CallbackHandler
 from dotenv import load_dotenv
 
 from workflow import ReactAgent
@@ -22,6 +23,7 @@ MAX_EXECUTE_TOOL_COUNT = int(os.getenv("MAX_EXECUTE_TOOL_COUNT"))
 
 # 전역 변수로 agent 저장
 agent_graph = None
+langfuse_handler = None
 
 
 class ChatRequest(BaseModel):
@@ -40,9 +42,11 @@ class ChatResponse(BaseModel):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """FastAPI lifespan 이벤트 핸들러"""
-    global agent_graph
+    global agent_graph, langfuse_handler
     
     print("🤖 Agent 초기화 중...")
+
+    langfuse_handler = CallbackHandler()
 
     agent_graph = ReactAgent(
         model_kwargs={
@@ -93,7 +97,7 @@ async def root():
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     """사용자 질문에 대한 답변 생성"""
-    global agent_graph
+    global agent_graph, langfuse_handler
     
     if agent_graph is None:
         raise HTTPException(status_code=500, detail="Agent가 초기화되지 않았습니다.")
@@ -108,8 +112,9 @@ async def chat(request: ChatRequest):
         # 설정값
         config = {
             "configurable": {
-                "max_execute_tool_count": MAX_EXECUTE_TOOL_COUNT
-            }
+                "max_execute_tool_count": MAX_EXECUTE_TOOL_COUNT,
+            },
+            "callbacks": [langfuse_handler]
         }
         
         # Agent 실행
