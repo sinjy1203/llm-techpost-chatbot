@@ -63,11 +63,12 @@ jobs:
         cache-to: type=gha,mode=max
     
     - name: Update Docker Hub description
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && false  # 임시로 비활성화
       continue-on-error: true
       uses: peter-evans/dockerhub-description@v4
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ env.DOCKER_IMAGE }}
-        readme-filepath: ./README.md 
+        readme-filepath: ./README.md
+        short-description: "기술블로그 RAG 기반 질의응답 API - Gemini, OpenAI, Anthropic 기술블로그 데이터 기반 AI 어시스턴트" 
