@@ -1,10 +1,10 @@
 import json
 import asyncio
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.messages import AIMessage, SystemMessage, ToolMessage
 from langchain_openai import ChatOpenAI
 from langgraph.types import Command
 from langgraph.graph import StateGraph, START, END
-from .prompt import SYSTEM_TEMPLATE
 from .state import Config, State
 
 
@@ -27,9 +27,18 @@ class ReactAgent:
         self.graph = workflow.compile()
 
     async def llm(self, state, config):
-        messages = [SystemMessage(content=SYSTEM_TEMPLATE.format(max_execute_tool_count=config["configurable"]["max_execute_tool_count"]))] + state.messages
+        langfuse_prompt = config["configurable"]["langfuse_client"].get_prompt("react-agent-system-prompt")
+        system_template = langfuse_prompt.get_langchain_prompt()
+        prompt = ChatPromptTemplate.from_messages(
+            [
+                SystemMessage(content=system_template.format(max_execute_tool_count=config["configurable"]["max_execute_tool_count"]))
+            ] + state.messages
+        )
+        prompt.metadata = {"langfuse_prompt": langfuse_prompt}
 
-        response = await self.llm_with_tools.ainvoke(messages)
+        chain = prompt | self.llm_with_tools
+
+        response = await chain.ainvoke({})
 
         if response.tool_calls:
             if (

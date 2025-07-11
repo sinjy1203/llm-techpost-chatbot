@@ -1,18 +1,25 @@
 import os
 import asyncio
+import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from langchain_core.messages import HumanMessage
+from langfuse import get_client
 from langfuse.langchain import CallbackHandler
 from dotenv import load_dotenv
 
+from setup_prompt import setup_system_prompt
 from workflow import ReactAgent
 from workflow.tools import *
 from workflow.state import State
 
 # 환경 변수 로드
 load_dotenv(override=True)
+
+# 로깅 설정
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 LLM_MODEL = os.getenv("LLM_MODEL")
 LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE"))
@@ -23,6 +30,7 @@ MAX_EXECUTE_TOOL_COUNT = int(os.getenv("MAX_EXECUTE_TOOL_COUNT"))
 
 # 전역 변수로 agent 저장
 agent_graph = None
+langfuse_client = None
 langfuse_handler = None
 
 
@@ -42,10 +50,12 @@ class ChatResponse(BaseModel):
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """FastAPI lifespan 이벤트 핸들러"""
-    global agent_graph, langfuse_handler
+    global agent_graph, langfuse_client, langfuse_handler
     
-    print("🤖 Agent 초기화 중...")
-
+    logger.info("🤖 Agent 초기화 중...")
+    
+    langfuse_client = get_client()
+    setup_system_prompt(langfuse_client)
     langfuse_handler = CallbackHandler()
 
     agent_graph = ReactAgent(
@@ -70,12 +80,12 @@ async def lifespan(app: FastAPI):
         ]
     )
     
-    print("✅ Agent 초기화 완료!")
+    logger.info("✅ Agent 초기화 완료!")
     
     yield
     
     # 종료 시 정리 작업
-    print("🔄 Agent 종료 중...")
+    logger.info("🔄 Agent 종료 중...")
     agent_graph = None
 
 
@@ -113,6 +123,7 @@ async def chat(request: ChatRequest):
         config = {
             "configurable": {
                 "max_execute_tool_count": MAX_EXECUTE_TOOL_COUNT,
+                "langfuse_client": langfuse_client
             },
             "callbacks": [langfuse_handler]
         }
@@ -137,8 +148,33 @@ async def health_check():
     """헬스 체크 엔드포인트"""
     return {
         "status": "healthy",
-        "agent_initialized": agent_graph is not None
+        "agent_initialized": agent_graph is not None,
+        "langfuse_client": langfuse_client is not None,
+        "langfuse_handler": langfuse_handler is not None
     }
+
+
+@app.post("/prompt/reload")
+async def reload_prompt():
+    """프롬프트 재로드 엔드포인트"""
+    global langfuse_client
+
+    langfuse_client = get_client()
+    
+    if langfuse_client is None:
+        raise HTTPException(status_code=500, detail="Langfuse 클라이언트가 초기화되지 않았습니다.")
+    
+    # 프롬프트 캐시 강제 새로고침
+    try:
+        langfuse_client.get_prompt(
+            "react-agent-system-prompt", 
+            type="chat", 
+            cache_ttl_seconds=0  # 캐시 강제 새로고침
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"프롬프트 캐시 새로고침 실패: {str(e)}")
+    
+    return {"message": "프롬프트가 성공적으로 재로드되었습니다."}
 
 
 if __name__ == "__main__":
