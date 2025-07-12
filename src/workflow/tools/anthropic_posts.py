@@ -16,6 +16,6 @@ class AnthropicSearchTool(VectorSearchTool):
     )
     args_schema: Type[BaseModel] = AnthropicSearchInput
     
-    def __init__(self, qdrant_url, embedding_model):
+    def __init__(self, *args, **kwargs):
         collection_name = "anthropic_posts"
-        super().__init__(qdrant_url, collection_name, embedding_model) 
+        super().__init__(collection_name=collection_name, **kwargs) 

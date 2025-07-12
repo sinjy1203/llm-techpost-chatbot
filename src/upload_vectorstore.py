@@ -15,7 +15,8 @@ path2tool = {
     "https://model-spec.openai.com/2025-04-11.html": OpenaiSearchTool,
 }
 QDRANT_URL = os.getenv("QDRANT_URL")
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
+DENSE_MODEL = os.getenv("DENSE_MODEL")
+SPARSE_MODEL = os.getenv("SPARSE_MODEL")
 
 
 async def main():
@@ -51,7 +52,8 @@ async def main():
         # 3. 해당 도구 초기화
         vector_tool = tool_class(
             qdrant_url=QDRANT_URL,
-            embedding_model=EMBEDDING_MODEL
+            dense_model_name=DENSE_MODEL,
+            sparse_model_name=SPARSE_MODEL
         )
         
         # 4. Qdrant에 문서 업로드 (컬렉션 생성)

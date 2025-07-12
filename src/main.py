@@ -23,7 +23,8 @@ logger = logging.getLogger(__name__)
 
 LLM_MODEL = os.getenv("LLM_MODEL")
 LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE"))
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL")
+DENSE_MODEL = os.getenv("DENSE_MODEL")
+SPARSE_MODEL = os.getenv("SPARSE_MODEL")
 QDRANT_URL = os.getenv("QDRANT_URL")
 MAX_EXECUTE_TOOL_COUNT = int(os.getenv("MAX_EXECUTE_TOOL_COUNT"))
 
@@ -66,15 +67,18 @@ async def lifespan(app: FastAPI):
         tools=[
             GeminiSearchTool(
                 qdrant_url=QDRANT_URL,
-                embedding_model=EMBEDDING_MODEL
+                dense_model_name=DENSE_MODEL,
+                sparse_model_name=SPARSE_MODEL
             ),
             OpenaiSearchTool(
                 qdrant_url=QDRANT_URL,
-                embedding_model=EMBEDDING_MODEL
+                dense_model_name=DENSE_MODEL,
+                sparse_model_name=SPARSE_MODEL
             ),
             AnthropicSearchTool(
                 qdrant_url=QDRANT_URL,
-                embedding_model=EMBEDDING_MODEL
+                dense_model_name=DENSE_MODEL,
+                sparse_model_name=SPARSE_MODEL
             ),
             WebSearchTool()   
         ]

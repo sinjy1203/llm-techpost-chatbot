@@ -9,6 +9,7 @@ from langchain_core.callbacks import (
 from langchain_core.runnables import RunnableConfig
 from pydantic import BaseModel, Field
 from qdrant_client import AsyncQdrantClient, models
+from fastembed import SparseTextEmbedding
 from langchain_openai import OpenAIEmbeddings
 from tqdm import tqdm
 
@@ -32,17 +33,20 @@ class VectorSearchTool(BaseTool):
     return_direct: bool = False
 
     vectorstore: object
-    embeddings: object
-    vector_size: int
+    dense_model: object
+    sparse_model: object
+    dense_vector_size: int
     collection_name: str
 
-    def __init__(self, qdrant_url, collection_name, embedding_model):
-        embeddings = OpenAIEmbeddings(model=embedding_model)
-        vector_size = len(embeddings.embed_query("test"))
+    def __init__(self, qdrant_url, dense_model_name, sparse_model_name, collection_name="vector_search"):
+        dense_model = OpenAIEmbeddings(model=dense_model_name)
+        sparse_model = SparseTextEmbedding(model_name=sparse_model_name)
+        vector_size = len(dense_model.embed_query("test"))
         super().__init__(
             vectorstore=AsyncQdrantClient(url=qdrant_url),
-            embeddings=embeddings,
-            vector_size=vector_size,
+            dense_model=dense_model,
+            sparse_model=sparse_model,
+            dense_vector_size=vector_size,
             collection_name=collection_name
         )
 
@@ -50,10 +54,15 @@ class VectorSearchTool(BaseTool):
         if create_collection:
             await self.vectorstore.recreate_collection(
                 collection_name=self.collection_name,
-                vectors_config=models.VectorParams(
-                    size=self.vector_size,
-                    distance=models.Distance.COSINE
-                )
+                vectors_config={
+                    "dense": models.VectorParams(
+                        size=self.dense_vector_size,
+                        distance=models.Distance.COSINE
+                    )
+                },
+                sparse_vectors_config={
+                    "sparse": models.SparseVectorParams(modifier=models.Modifier.IDF)
+                }
             )
         
         payloads = []
@@ -62,15 +71,22 @@ class VectorSearchTool(BaseTool):
             vector_contents.append(doc[vector_field])
             payloads.append({k: v for k, v in doc.items()})
 
-        vectors = self.batch_embed(vector_contents, batch_size=64)
+        dense_vectors = self.batch_embed(vector_contents, batch_size=64)
+        sparse_vectors = list(self.sparse_model.embed(content for content in vector_contents))
+
+        points = []
+        for idx, (dense_vector, sparse_vector, payload) in enumerate(zip(dense_vectors, sparse_vectors, payloads)):
+            points.append(
+                models.PointStruct(
+                    id=idx,
+                    vector={"dense": dense_vector, "sparse": sparse_vector.as_object()},
+                    payload=payload
+                )
+            )
         
         await self.vectorstore.upsert(
             collection_name=self.collection_name,
-            points=models.Batch(
-                ids=[i for i in range(len(documents))],
-                vectors=vectors,
-                payloads=payloads
-            )
+            points=points
         )
 
     def _run(
@@ -88,11 +104,27 @@ class VectorSearchTool(BaseTool):
         run_manager: Optional[AsyncCallbackManagerForToolRun] = None,
     ):
         
-        vector = await self.embeddings.aembed_query(query)
+        dense_vector = await self.dense_model.aembed_query(query)
+        sparse_vector = next(self.sparse_model.query_embed(query))
+
         result = await self.vectorstore.query_points(
             collection_name=self.collection_name,
-            query=vector,
-            limit=top_k
+            query=models.FusionQuery(
+                fusion=models.Fusion.RRF
+            ), 
+            prefetch=[
+                models.Prefetch(
+                    query=dense_vector,
+                    using="dense",
+                    limit=top_k*2
+                ),
+                models.Prefetch(
+                    query=sparse_vector.as_object(),
+                    using="sparse",
+                    limit=top_k*2
+                )
+            ],
+            limit=top_k,
         )
 
         contexts = []
@@ -118,7 +150,7 @@ class VectorSearchTool(BaseTool):
                      total=total_batches,
                      unit="batch"):
             batch = texts[i:i+batch_size]
-            embeddings = self.embeddings.embed_documents(batch)
+            embeddings = self.dense_model.embed_documents(batch)
             total_vectors.extend(embeddings)
         
         print(f"임베딩 완료: {len(total_vectors)}개 벡터 생성")
