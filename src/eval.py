@@ -76,7 +76,10 @@ async def generate_answer(test_data, agent):
             "max_execute_tool_count": MAX_EXECUTE_TOOL_COUNT,
             "langfuse_client": langfuse_client
         },
-        "callbacks": [langfuse_handler]
+        "callbacks": [langfuse_handler],
+        "metadata": {
+            "langfuse_tags": ["eval"]
+        }
     }
     response = await agent.ainvoke(initial_state, config=config)
 

@@ -129,7 +129,10 @@ async def chat(request: ChatRequest):
                 "max_execute_tool_count": MAX_EXECUTE_TOOL_COUNT,
                 "langfuse_client": langfuse_client
             },
-            "callbacks": [langfuse_handler]
+            "callbacks": [langfuse_handler],
+            "metadata": {
+                "langfuse_tags": ["api"]
+            }
         }
         
         # Agent 실행
