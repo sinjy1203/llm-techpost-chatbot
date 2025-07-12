@@ -1,0 +1,333 @@
+[
+  {
+    "question": "Claude 4 모델 시리즈의 주요 특징은 무엇인가요?",
+    "answer": "Claude 4 시리즈는 높은 정확도, 긴 맥락 이해, 고급 추론 능력을 갖춘 모델로, 특히 Claude 3.5 Sonnet은 높은 성능과 실용성을 균형 있게 갖추고 있습니다.",
+    "references": [
+      "The Claude 4 model family currently includes Claude 4, Claude 3.5 Sonnet, Claude 3 Opus, and Claude 3 Sonnet.",
+      "The Claude 3.5 Sonnet model achieves high levels of performance while being efficient and practical."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude는 사용자 지향적인 설계 방식을 어떻게 적용하고 있나요?",
+    "answer": "Anthropic은 Claude를 설계할 때 사용자 중심 원칙에 기반하여, 유용성과 안전성을 중심으로 사용자 피드백을 제품 개발에 반영하고 있습니다.",
+    "references": [
+      "We use user-centric principles in Claude’s design and development, focusing on utility, safety, and incorporating user feedback into our product development process."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude 모델의 강화학습(RL) 접근은 무엇을 목표로 하나요?",
+    "answer": "Claude는 헬퍼스코어 기반의 강화학습을 통해 실제 사용자 유용성과 사용자 선호도를 최대화하도록 학습되었습니다.",
+    "references": [
+      "Claude is trained using RL from human feedback and helpfulness scoring to maximize real-world utility and user preferences."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude는 어떠한 방법으로 자기 검토(self-review)를 수행하나요?",
+    "answer": "Claude는 생성된 응답의 오류를 식별하고 수정하기 위해 자기 검토 단계를 포함하며, 이 과정에서 더 정확하고 일관된 응답을 제공합니다.",
+    "references": [
+      "Claude uses a self-review step to identify and correct errors in generated answers."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude의 컨텍스트 창 크기는 얼마나 되며, 어떤 작업에 유리한가요?",
+    "answer": "Claude 3.5 Sonnet은 최대 200K 토큰의 컨텍스트를 지원하며, 긴 문서 요약이나 문맥 유지가 필요한 고차원적인 작업에 유리합니다.",
+    "references": [
+      "Claude 3.5 Sonnet supports a context window of up to 200,000 tokens, which is useful for summarizing long documents or maintaining extended context."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude는 안전성과 관련된 어떤 훈련 방식을 사용하나요?",
+    "answer": "Claude는 안전성을 강화하기 위해 레드팀 테스트, 자동화된 안전성 평가, 그리고 강화학습 정책을 통한 행동 제한 방식을 활용합니다.",
+    "references": [
+      "We apply safety-specific training such as red teaming, automated safety evaluations, and reinforcement learning to reduce harmful outputs."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude는 도구 사용과 관련된 기능을 어떻게 제공하나요?",
+    "answer": "Claude는 외부 도구 사용 기능을 통해 코드 실행, API 호출, 데이터 분석 등 복잡한 작업을 수행할 수 있도록 설계되어 있습니다.",
+    "references": [
+      "Claude can use external tools to perform tasks such as code execution, API calls, and data analysis."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude는 멀티모달 입력을 어떻게 처리하나요?",
+    "answer": "Claude는 텍스트뿐만 아니라 이미지와 같은 멀티모달 입력을 지원하며, 이를 통해 시각 정보와 언어 정보를 통합적으로 이해할 수 있습니다.",
+    "references": [
+      "Claude supports multimodal inputs including images, enabling it to understand and reason across text and visual content."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude의 사용자 피드백 시스템은 어떤 방식으로 작동하나요?",
+    "answer": "Claude는 사용자 피드백을 수집하여 모델 평가 및 향후 업데이트에 반영함으로써 지속적인 품질 개선을 추구합니다.",
+    "references": [
+      "We gather user feedback to evaluate Claude and guide future improvements."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Claude 모델은 생성된 응답의 품질을 어떻게 보장하나요?",
+    "answer": "Claude는 인간 피드백 기반 강화 학습과 자기 검토 절차, 그리고 정량적 평가 지표를 통해 응답 품질을 지속적으로 개선하고 있습니다.",
+    "references": [
+      "Claude’s responses are improved through RLHF, self-review, and regular performance evaluations using quantitative metrics."
+    ],
+    "source": "./data/Claude_4_System_Card.pdf"
+  },
+  {
+    "question": "Gemini 2.5 Pro 모델은 어떤 주요 기능을 갖추고 있나요?",
+    "answer": "Gemini 2.5 Pro는 고급 추론 능력, 멀티모달 입력 지원, 긴 컨텍스트 처리 능력, 도구 사용 능력을 갖춘 모델로, 최대 3시간 길이의 비디오도 처리할 수 있습니다.",
+    "references": [
+      "Gemini 2.5 Pro is our most capable model yet, achieving SoTA performance on frontier coding and reasoning benchmarks.",
+      "It excels at multimodal understanding and it is now able to process up to 3 hours of video content.",
+      "Its unique combination of long context, multimodal and reasoning capabilities can be combined to unlock new agentic workflows."
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5 Flash 모델의 특징은 무엇인가요?",
+    "answer": "Gemini 2.5 Flash는 뛰어난 추론 능력을 제공하면서도 계산 자원과 지연 시간을 줄이는 데 중점을 둔 하이브리드 모델입니다.",
+    "references": [
+      "Gemini 2.5 Flash provides excellent reasoning abilities at a fraction of the compute and latency requirements"
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5 모델은 어떤 아키텍처를 사용하나요?",
+    "answer": "Gemini 2.5 모델은 Sparse Mixture-of-Experts (MoE) 기반의 Transformer 구조를 사용하여 입력 토큰마다 일부 전문가만 활성화함으로써 계산 자원을 효율적으로 사용합니다.",
+    "references": [
+      "The Gemini 2.5 models are sparse mixture-of-experts (MoE) transformers with native multimodal support for text, vision, and audio inputs.",
+      "Sparse MoE models activate a subset of model parameters per input token by learning to dynamically route tokens to a subset of parameters (experts)"
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5 모델은 어떤 데이터를 기반으로 학습되었나요?",
+    "answer": "Gemini 2.5는 웹 문서, 코드, 이미지, 오디오, 비디오 등 다양한 도메인과 모달리티의 데이터를 포함한 대규모 데이터셋을 기반으로 사전 학습되었으며, 최신 데이터 커트오프는 2025년 1월입니다.",
+    "references": [
+      "Our pre-training dataset is a large-scale, diverse collection of data encompassing a wide range of domains and modalities",
+      "with a cutoff date as June 2024 for 2.0 and January 2025 for 2.5."
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5의 ‘Thinking’ 기능은 무엇인가요?",
+    "answer": "Gemini 2.5는 'Thinking' 기능을 통해 추론 시간을 늘려 더 정확한 응답을 생성할 수 있으며, 사용자가 Thinking 예산을 설정하여 비용과 성능 간의 균형을 조절할 수 있습니다.",
+    "references": [
+      "Gemini Thinking models are trained with Reinforcement Learning to use additional compute at inference time to arrive at more accurate answers.",
+      "We also provide the ability to set a Thinking budget, constraining the model to respond within a desired number of tokens."
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5는 프로그래밍 작업에서 어떤 성능을 보이나요?",
+    "answer": "Gemini 2.5 Pro는 LiveCodeBench에서 69.0%, Aider Polyglot에서 82.2%, SWE-bench Verified에서 최대 67.2%의 정확도를 기록하며 기존 모델보다 뛰어난 성능을 보여주었습니다.",
+    "references": [
+      "performance on LiveCodeBench increased from 30.5% for Gemini 1.5 Pro to 69.0% for Gemini 2.5 Pro",
+      "while that for Aider Polyglot went from 16.9% to 82.2%",
+      "Verified SWE-bench: attempts multiple ... 67.2%"
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5는 장문 컨텍스트 처리에서 어떤 성능을 보이나요?",
+    "answer": "Gemini 2.5는 최대 100만 토큰 이상의 컨텍스트를 처리할 수 있으며, LOFT 및 MRCR-V2 같은 긴 문맥 평가에서 이전 모델 대비 뛰어난 성능을 보였습니다.",
+    "references": [
+      "Gemini 2.5 models build on the success of Gemini 1.5 in processing long-context queries",
+      "LOFT (hard ≤128K ... 87.0%",
+      "1M ... 69.8%"
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5는 어떤 방식으로 안전성과 도움 가능성을 개선했나요?",
+    "answer": "Gemini 2.5는 자동화된 레드팀 평가와 강화 학습을 통해 정책 위반을 줄이고, 더 많은 사용자 요청에 응답할 수 있도록 도움 가능성을 향상시켰습니다.",
+    "references": [
+      "We describe our current approach in this section, which includes how we train and evaluate our models, focusing on automated red teaming",
+      "Gemini 2.5 Flash 26.9% 6.6%, Gemini 2.5 Pro 24.3% 6.1% (Dangerous Content policy violation and Helpfulness violations)"
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5는 실제 어떤 프로젝트에서 활용되었나요?",
+    "answer": "Gemini 2.5 Pro는 Pokémon 게임을 완전히 자동으로 플레이하며 406시간 만에 게임을 클리어하는 데 성공했습니다. 이 실험을 통해 장기적 목표 설정과 도구 활용 능력이 입증되었습니다.",
+    "references": [
+      "On May 22, 2025, GPP began a fully autonomous 2nd run through the game with Gemini 2.5 Pro ... completing the game in 406.5 hours",
+      "Each task requires reasoning over a long context - the pathfindermodel would often have to reason over contexts of 100K+ tokens"
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "Gemini 2.5 Pro는 어떤 창의적 작업이 가능한가요?",
+    "answer": "Gemini 2.5 Pro는 이미지에서 HTML/SVG 구조를 생성하거나, 연극 대본을 연습용 앱으로 만들고, 태양계 모델이나 푸리에 급수로 로고 그리기 등 다양한 창의적 작업을 수행할 수 있습니다.",
+    "references": [
+      "Gemini 2.5 Pro can utilize its underlying spatial understanding capability and convert images into a structural representation like HTML or SVG.",
+      "Gemini 2.5 Pro demonstrates strong skills in generating sophisticated simulations and visualizations"
+    ],
+    "source": "./data/gemini_v2_5_report.pdf"
+  },
+  {
+    "question": "2025‑04‑11 Model Spec 업데이트의 주요 목적은 무엇인가요?",
+    "answer": "이번 업데이트는 사용자 정의(customizability), 투명성(transparency), 지적 자유(intellectual freedom)를 강화하고, 민감·논쟁적 주제에 대해 책임감 있게 대응하기 위한 것입니다.",
+    "references": [
+      "This update reinforces our commitments to customizability, transparency, and intellectual freedom to explore, debate, and create with AI without arbitrary restrictions",
+      "The revised specification focuses on customizability, transparency, and \"intellectual freedom\""
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "Model Spec에 정의된 명령 우선순위(chain of command)는 어떻게 되나요?",
+    "answer": "명령 우선순위는 플랫폼(OpenAI)의 지침이 가장 우선이며, 그 다음 개발자, 마지막으로 사용자의 지침을 따릅니다.",
+    "references": [
+      "Defines how the model prioritizes instructions from the platform (OpenAI), developer, and user in order",
+      "Specifies a clear \"chain of command\" that defines which instructions take priority: platform-level rules from OpenAI come first, followed by developer guidelines, and then user preferences"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "Model Spec은 센서티브하거나 논쟁적인 주제 처리에 대해 어떤 지침을 제공하나요?",
+    "answer": "민감하거나 논쟁적인 주제는 '극단적 주의' 대신 '책임 있는 추론(seek the truth together)' 방식으로 접근하며, 유해 가능성이 있는 내용에 대해 명확한 태도를 유지하도록 지시합니다.",
+    "references": [
+      "Rather than defaulting to extreme caution, the spec encourages models to \"seek the truth together\" with users while maintaining clear moral stances on issues like misinformation or potential harm"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "Model Spec은 민감한 성적 콘텐츠에 대해 어떻게 지시하고 있나요?",
+    "answer": "명시적으로는 금지하지 않으며, 교육적·의료적 맥락에서나 사용자 제공 콘텐츠의 변환 같은 ‘grow‑up mode’ 범주에서만 허용될 수 있다고 규정되어 있습니다.",
+    "references": [
+      "Sensitive content (such as erotica or gore) may only be generated under specific circumstances (e.g., educational, medical, or historical contexts, or transformations of user‑provided sensitive content)"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "Model Spec에 따라 모델은 'AI sycophancy' 문제를 어떻게 해결하나요?",
+    "answer": "모델은 과도한 동의를 피하고, 사실 기반 응답과 정직한 피드백을 제공하도록 설계되어 있습니다.",
+    "references": [
+      "The spec also introduces a clear \"AI sycophancy\" policy: give the same factual answer regardless of how a question is phrased; provide honest feedback rather than empty praise"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "이번 업데이트에서 문서의 분량은 어떻게 변했나요?",
+    "answer": "이전 약 10페이지에서 이번에는 약 63페이지로 크게 확장되었습니다.",
+    "references": [
+      "The new 63‑page specification, up from around 10 pages in its previous version"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "Model Spec의 라이선스는 무엇이며, 활용 가능성은 어떻게 되나요?",
+    "answer": "Creative Commons Zero(CC0) 퍼블릭 도메인으로 공개되어 누구나 자유롭게 사용, 수정, 재배포할 수 있습니다.",
+    "references": [
+      "The Model Spec—like our models—will continue to evolve ... we’re releasing this version of the Model Spec into the public domain under a Creative Commons CC0 license",
+      "OpenAI is releasing the specification under a Creative Commons Zero (CC0) license"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "Model Spec 개선을 위해 어떤 검증 절차를 거쳤나요?",
+    "answer": "제안된 내용들은 전문가 검토와 사용자 설문을 통해 테스트되었으며, 특히 파일럿 테스트에 약 1,000명이 참여했습니다.",
+    "references": [
+      "We have been conducting pilot studies with around 1,000 individuals—each reviewing model behavior, proposed rules and sharing their thoughts",
+      "These prompts were created using a combination of model generation and expert human review"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "Model Spec 업데이트에서 수정된 사례나 예시는 어떤 것이 있나요?",
+    "answer": "잘못된 정렬(misalignment) 언급 문제를 수정하고, 'white lies' 예외를 'pleasantries'로 좁혔으며, LaTeX 렌더링과 코드 변환 예시 버그를 고쳤습니다.",
+    "references": [
+      "Updates the overview to fix an issue where misalignment was no longer mentioned as a possible reason for the assistant pursuing the wrong goals",
+      "Narrows the exception for \"white lies\" to the intended meaning of \"pleasantries\"",
+      "Fixes a bug in the example \"Transforming buggy code in an interactive chat\"",
+      "Fixes LaTeX syntax in a few of the examples, and adds LaTeX rendering to the html version"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "Model Spec은 어떻게 지속적으로 개선될 예정인가요?",
+    "answer": "정기적으로 예시 집합을 확장하고, 사용자·개발자 피드백과 실제 활용 데이터를 바탕으로 반복적으로 업데이트될 예정입니다.",
+    "references": [
+      "We plan to keep broadening our challenge set with new examples",
+      "Moving forward ... you can always find and track the latest updates at model‑spec.openai.com"
+    ],
+    "source": "https://model-spec.openai.com/2025-04-11.html"
+  },
+  {
+    "question": "LLM 시스템 설계에서 사용자 정의(customizability)와 안전성(safety)은 어떻게 조화를 이루어야 하나요?",
+    "answer": "LLM 시스템은 사용자 지침을 유연하게 수용할 수 있는 사용자 정의(customizability)를 제공하면서도, 잠재적 위험에 대한 예방 조치를 갖춘 안전성(safety)을 동시에 확보해야 합니다. 예를 들어, OpenAI의 모델 사양은 플랫폼, 개발자, 사용자 지침의 우선순위를 정의하며, 고위험 기능에 대해서는 추가 검토를 요구합니다. 한편, Claude 4는 ASL-3 수준에서 배포되며 고위험 에이전트 사용 시 강화된 레드팀 테스트와 안전성 훈련을 시행하고 있습니다. Gemini 2.5 역시 도구 사용과 멀티모달 작업에서 고급 기능을 지원하면서도, 오용 방지를 위한 제한적 응답을 설계에 포함하고 있습니다.",
+    "references": [
+      "Specifies a clear \"chain of command\" that defines which instructions take priority: platform-level rules from OpenAI come first, followed by developer guidelines, and then user preferences. (https://model-spec.openai.com/2025-04-11.html)",
+      "Claude Opus 4 showed substantially greater capabilities in CBRN-related evaluations... and enhanced tool use and agentic workflows. (Claude_4_System_Card.pdf)",
+      "Gemini 2.5 shows substantial improvement in tool use, agentic tasks, and complex reasoning. (gemini_v2_5_report.pdf)"
+    ],
+    "source": [
+      "https://model-spec.openai.com/2025-04-11.html",
+      "Claude_4_System_Card.pdf",
+      "gemini_v2_5_report.pdf"
+    ]
+  },
+  {
+    "question": "최신 LLM 모델들은 멀티모달 처리에서 어떤 발전을 보여주고 있나요?",
+    "answer": "Claude 4, Gemini 2.5, 그리고 OpenAI 모델 사양 모두 멀티모달 처리 능력 향상에 주목하고 있습니다. Claude 4는 이미지 이해와 도구 사용을 결합한 고급 멀티모달 작업을 지원하며, Gemini 2.5는 3시간 분량의 비디오 입력을 처리할 수 있습니다. 또한 OpenAI 모델 사양은 텍스트 외의 모달리티에서도 투명성과 사용자 통제 가능성을 확보해야 한다고 명시하고 있습니다.",
+    "references": [
+      "Claude can use external tools to perform tasks such as code execution, API calls, and data analysis. (Claude_4_System_Card.pdf)",
+      "Gemini 2.5 excels at multimodal understanding and it is now able to process up to 3 hours of video content. (gemini_v2_5_report.pdf)",
+      "Model behavior should be predictable, interpretable, and controllable. (https://model-spec.openai.com/2025-04-11.html)"
+    ],
+    "source": [
+      "Claude_4_System_Card.pdf",
+      "gemini_v2_5_report.pdf",
+      "https://model-spec.openai.com/2025-04-11.html"
+    ]
+  },
+  {
+    "question": "LLM의 도구 사용 능력은 안전성과 어떻게 연결되나요?",
+    "answer": "도구 사용은 LLM의 기능성을 확장하지만, 동시에 오남용 가능성을 내포하므로 안전성과의 균형이 중요합니다. Claude 4는 고위험 도구 사용 시 ASL-3 정책을 적용하며, Gemini 2.5는 에이전트 워크플로우와 함께 툴 사용 성능을 강화하면서도 사용자 신뢰를 중시합니다. OpenAI 모델 사양에서도 도구 사용은 명확한 목적과 통제가 필요하다고 강조합니다.",
+    "references": [
+      "Claude Opus 4 showed enhanced tool use and agentic workflows... deployed with ASL-3 measures. (Claude_4_System_Card.pdf)",
+      "Gemini 2.5 models are optimized for long-context agentic workflows including tool use. (gemini_v2_5_report.pdf)",
+      "Systems should be designed and deployed in ways that ensure safety, security, and resilience. (https://model-spec.openai.com/2025-04-11.html)"
+    ],
+    "source": [
+      "Claude_4_System_Card.pdf",
+      "gemini_v2_5_report.pdf",
+      "https://model-spec.openai.com/2025-04-11.html"
+    ]
+  },
+  {
+    "question": "OpenAI, Google, Anthropic의 모델들은 어떻게 사용자 피드백을 반영하고 있나요?",
+    "answer": "세 모델 모두 사용자 피드백 기반 개선을 중요한 설계 원칙으로 삼고 있습니다. Claude는 피드백을 통해 자기 검토 및 강화학습을 수행하며, Gemini는 실제 제품 내 사용자 행동을 학습에 반영합니다. OpenAI는 사용자, 개발자, 플랫폼의 명시적 지침을 우선순위로 조정하며 시스템 동작을 투명하게 만듭니다.",
+    "references": [
+      "We gather user feedback to evaluate Claude and guide future improvements. (Claude_4_System_Card.pdf)",
+      "Gemini 2.5 incorporates learning from usage patterns in Google products. (gemini_v2_5_report.pdf)",
+      "Specifies a clear \"chain of command\" that defines which instructions take priority... (https://model-spec.openai.com/2025-04-11.html)"
+    ],
+    "source": [
+      "Claude_4_System_Card.pdf",
+      "gemini_v2_5_report.pdf",
+      "https://model-spec.openai.com/2025-04-11.html"
+    ]
+  },
+  {
+    "question": "고위험 영역에서 LLM 모델을 배포할 때 적용되는 절차나 기준은 무엇인가요?",
+    "answer": "Claude 4는 고위험 기능 평가를 통해 ASL-3로 분류되어 레드팀 테스트와 안전 훈련이 강화됩니다. OpenAI 모델 사양 역시 고위험 기능에 대해 명확한 고지, 예측 가능성, 검토 가능성을 요구하며, 도입 전 충분한 검증이 필요함을 명시합니다. Gemini 2.5는 멀티모달 추론이나 고난도 코드 작성 등에서도 안전성을 고려한 아키텍처 설계를 강조합니다.",
+    "references": [
+      "We are deploying Claude Opus 4 with ASL-3 measures as a precautionary, provisional action. (Claude_4_System_Card.pdf)",
+      "Users should be informed when interacting with AI systems, especially those that pose significant risks. (https://model-spec.openai.com/2025-04-11.html)",
+      "Gemini 2.5 unlocks new capabilities in agentic reasoning and complex code workflows. (gemini_v2_5_report.pdf)"
+    ],
+    "source": [
+      "Claude_4_System_Card.pdf",
+      "https://model-spec.openai.com/2025-04-11.html",
+      "gemini_v2_5_report.pdf"
+    ]
+  }
+]

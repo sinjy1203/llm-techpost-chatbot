@@ -77,16 +77,22 @@ cp .env.example .env
 
 ### **3. 서비스 실행**
 
-#### **첫 번째 실행 (데이터 업로드 + API 서버)**
+#### **데이터 인덱싱**
 ```bash
 # 초기 데이터 업로드와 함께 실행
 docker-compose --profile init up -d
 ```
 
-#### **일반 실행 (API만)**
+#### **API server 실행**
 ```bash
 # 이미 데이터가 있는 경우
-docker-compose up -d
+docker-compose --profile api up -d
+```
+
+#### **RAG pipeline 평가**
+```bash
+# 이미 데이터가 있는 경우
+docker-compose --profile eval up -d
 ```
 
 ### **4. API 접근**

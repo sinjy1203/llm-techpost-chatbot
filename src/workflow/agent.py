@@ -6,6 +6,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.types import Command
 from langgraph.graph import StateGraph, START, END
 from .state import Config, State
+from .prompt import SYSTEM_TEMPLATE
 
 
 class ReactAgent:
@@ -27,8 +28,12 @@ class ReactAgent:
         self.graph = workflow.compile()
 
     async def llm(self, state, config):
-        langfuse_prompt = config["configurable"]["langfuse_client"].get_prompt("react-agent-system-prompt")
-        system_template = langfuse_prompt.get_langchain_prompt()
+        try:
+            langfuse_prompt = config["configurable"]["langfuse_client"].get_prompt("react-agent-system-prompt")
+            system_template = langfuse_prompt.get_langchain_prompt()
+        except:
+            system_template = SYSTEM_TEMPLATE
+            
         prompt = ChatPromptTemplate.from_messages(
             [
                 SystemMessage(content=system_template.format(max_execute_tool_count=config["configurable"]["max_execute_tool_count"]))

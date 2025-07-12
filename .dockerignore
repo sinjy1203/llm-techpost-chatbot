@@ -17,6 +17,7 @@ qdrant_data
 
 # 개발 데이터 및 로그
 data/
+eval_result/
 
 # Git 관련
 .git

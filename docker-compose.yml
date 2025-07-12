@@ -1,4 +1,60 @@
 services:
+  upload:
+    profiles: ["init"] 
+    image: sinjy1203/llm-techpost-chatbot-api:latest
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+    command: uv run python upload_vectorstore.py
+    volumes:
+      - ./data:/app/src/data:ro
+    restart: "no"
+
+  api:
+    profiles: ["api"]
+    image: sinjy1203/llm-techpost-chatbot-api:latest
+    ports:
+      - "8000:8000"
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      langfuse-web:
+        condition: service_healthy
+      langfuse-worker:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - LANGFUSE_HOST=http://langfuse-web:3000
+    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000
+    restart: unless-stopped
+
+  eval:
+    profiles: ["eval"]
+    image: sinjy1203/llm-techpost-chatbot-api:latest
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      langfuse-web:
+        condition: service_healthy
+      langfuse-worker:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - LANGFUSE_HOST=http://langfuse-web:3000
+    command: uv run python eval.py
+    volumes:
+      - ./data:/app/src/data:ro
+      - ./eval_result:/app/src/eval_result
+    restart: "no"
+
   qdrant:
     image: qdrant/qdrant:v1.14.1
     ports:
@@ -18,40 +74,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-
-  upload:
-    profiles: ["init"] 
-    image: sinjy1203/llm-techpost-chatbot-api:latest
-    depends_on:
-      qdrant:
-        condition: service_healthy
-    env_file:
-      - .env
-    environment:
-      - QDRANT_URL=http://qdrant:6333
-    command: uv run python upload_vectorstore.py
-    volumes:
-      - ./data:/app/src/data:ro
-    restart: "no"
-
-  api:
-    image: sinjy1203/llm-techpost-chatbot-api:latest
-    ports:
-      - "8000:8000"
-    depends_on:
-      qdrant:
-        condition: service_healthy
-      langfuse-web:
-        condition: service_healthy
-      langfuse-worker:
-        condition: service_healthy
-    env_file:
-      - .env
-    environment:
-      - QDRANT_URL=http://qdrant:6333
-      - LANGFUSE_HOST=http://langfuse-web:3000
-    command: uv run uvicorn main:app --host 0.0.0.0 --port 8000
-    restart: unless-stopped
 
   langfuse-worker:
     image: docker.io/langfuse/langfuse-worker:3

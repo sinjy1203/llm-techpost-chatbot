@@ -5,6 +5,7 @@
 
 __pycache__
 qdrant_data
+eval_result/
 
 test_*.py
 
