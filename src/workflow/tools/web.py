@@ -58,7 +58,7 @@ class WebSearchTool(BaseTool):
 
         results = data['web']['results'][:top_k]
         results = [
-            {"title": item['title'], "time": item.get('page_age', ''), "content": item['description']}
+            {"title": item['title'], "url": item['profile']['url'], "time": item.get('page_age', ''), "content": item['description']}
             for item in results
         ]
 
